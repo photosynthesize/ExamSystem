@@ -12,6 +12,7 @@
         errorCode = Integer.valueOf(regError);
     }
 %>
+<!--修复了学生无法注册的bug-->
 <html>
 <head>
     <meta charset="UTF-8">
