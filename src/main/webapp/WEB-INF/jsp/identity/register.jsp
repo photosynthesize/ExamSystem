@@ -3,6 +3,14 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    String regError = (String)request.getAttribute("regError");
+    int errorCode = 0;
+    if(regError == null || regError.equals("")){
+        errorCode = 0;
+    }
+    else{
+        errorCode = Integer.valueOf(regError);
+    }
 %>
 <html>
 <head>
@@ -13,7 +21,7 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>注册</title>
     <script>
-        var regError = ${requestScope.regError};
+        var regError = <%=errorCode%>;
 
         $(document).ready(function () {
             if (regError == 1) {
@@ -44,11 +52,11 @@
 </div>
 <h2 class="text-center">注册</h2>
 <hr/>
-<center>
-    <button class="btn" onclick="selectRole('teacher')">教师注册</button>
+<div class="text-center">
+    <button class="btn btn-default" onclick="selectRole('teacher')">教师注册</button>
     &nbsp;&nbsp;
-    <button class="btn" onclick="selectRole('student')">学生注册</button>
-</center>
+    <button class="btn btn-default" onclick="selectRole('student')">学生注册</button>
+</div>
 <form id="stu" action="<%=basePath%>/regStudent.do" method="post" class="form-inline text-center hidden">
     <h3>学生注册</h3>
     <label>用户名:</label>
