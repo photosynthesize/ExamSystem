@@ -10,19 +10,25 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes(value = {"curType", "curName", "curId"})
+@SessionAttributes(value = {"curRole", "curName", "curId"})
 public class LoginController {
+
 
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping("/doStudentLogin")
-    public ModelAndView doStudentLogin(User user){
+    @RequestMapping("/doLogin")
+    public ModelAndView doLogin(User user){
         ModelAndView mav = new ModelAndView("jsp/index");
-        Student stu = loginService.studentLogin(user);
-        mav.addObject("curType", "STUDENT");
-        mav.addObject("curName", stu.getStuName());
-        mav.addObject("curId", stu.getStuId());
+        User user1 = loginService.login(user);
+        if(user1 == null){
+            mav.setViewName("jsp/identity/login");
+            mav.addObject("loginError", 1);
+            return mav;
+        }
+        System.out.printf("username:%s\npassword:%s\nrole:%s\n", user1.getUsername(), user1.getPassword(), user1.getRole());
+        mav.addObject("curRole", user1.getRole());
+        mav.addObject("curName", user1.getUsername());
         return mav;
     }
 

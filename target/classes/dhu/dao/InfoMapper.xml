@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dhu.dao.InfoMapper">
+    <resultMap id="teacherMap" type="dhu.pojo.Teacher">
+        <id property="teaId" column="tea_id"/>
+        <result property="teaName" column="Tea_Name"/>
+        <result property="teaSub" column="Tea_Sub"/>
+        <result property="teaUsername" column="User_Name"/>
+        <result property="teaPassword" column="User_psd"/>
+    </resultMap>
+
+    <resultMap id="studentMap" type="dhu.pojo.Student">
+        <id property="stuId" column="stu_id"/>
+        <result property="stuName" column="Stu_Name"/>
+        <result property="stuClass" column="Stu_Class"/>
+        <result property="stuMajor" column="Stu_Major"/>
+        <result property="stuUsername" column="User_Name"/>
+        <result property="stuPassword" column="User_psd"/>
+    </resultMap>
+
+    <update id="updateTeacherNameAndPassword" parameterType="dhu.pojo.Teacher">
+        update teainfo set tea_name=#{teaName}, User_psd=#{teaPassword} where User_Name=#{teaUsername}
+    </update>
+
+    <select id="getTeacherByUserName" parameterType="java.lang.String" resultMap="teacherMap">
+        select * from teainfo where User_Name=#{1}
+    </select>
+
+    <update id="updateStudentNameAndPassword" parameterType="dhu.pojo.Student">
+        update stuinfo set Stu_Name=#{stuName}, User_psd=#{stuPassword} where User_Name=#{stuUsername}
+    </update>
+
+    <select id="getStudentByUserName" parameterType="java.lang.String" resultMap="studentMap">
+        select * from stuinfo where User_Name=#{1}
+    </select>
+
+</mapper>

@@ -3,6 +3,15 @@ package dhu.pojo;
 public class User {
     String username;
     String password;
+    String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;

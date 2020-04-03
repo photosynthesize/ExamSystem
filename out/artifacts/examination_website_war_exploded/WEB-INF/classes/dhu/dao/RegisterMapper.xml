@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dhu.dao.RegisterMapper">
+
+    <select id="hasDuplication" parameterType="java.lang.String" resultType="int">
+        select count(*) from UserInfo where User_Name = #{1}
+    </select>
+
+    <select id="stuIdExists" parameterType="int" resultType="int">
+        select count(*) from stuinfo where stu_id = #{1}
+    </select>
+
+    <select id="teaIdExists" parameterType="int" resultType="int">
+        select count(*) from teainfo where tea_id = #{1}
+    </select>
+
+    <insert id="doRegister" parameterType="dhu.pojo.User">
+        insert into UserInfo(User_Name, User_psd, Role) values(#{username}, #{password}, #{role})
+    </insert>
+
+    <insert id="regStudent" parameterType="dhu.pojo.Student">
+        insert into stuinfo(stu_id, stu_name, stu_major, stu_class, User_Name, User_psd) values(#{stuID}, #{stuName}, #{stuMajor}, #{stuClass}, #{stuUsername}, #{stuPassword})
+    </insert>
+
+    <insert id="regTeacher" parameterType="dhu.pojo.Teacher">
+        insert into teainfo(tea_id, tea_name, tea_sub, User_Name, User_psd) values(#{teaId}, #{teaName}, #{teaSub}, #{teaUsername}, #{teaPassword})
+    </insert>
+
+</mapper>

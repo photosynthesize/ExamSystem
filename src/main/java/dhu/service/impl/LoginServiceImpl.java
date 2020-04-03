@@ -19,4 +19,9 @@ public class LoginServiceImpl implements LoginService {
         Student stu = loginMapper.stuLogin(user);
         return stu;
     }
+
+    @Override
+    public User login(User user) {
+        return loginMapper.login(user);
+    }
 }

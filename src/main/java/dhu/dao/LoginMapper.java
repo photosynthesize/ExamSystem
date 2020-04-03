@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LoginMapper {
     public Student stuLogin(User user);
+    User login(User user);
 }
